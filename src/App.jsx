@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import "./styles.css";
 
 
@@ -9,6 +10,12 @@ function Square({ value, onSquareClick, isWinner }) {
     </button>
   );
 }
+// Define las validaciones PropTypes para Square
+Square.propTypes = {
+  value: PropTypes.string.isRequired, // value debe ser una cadena y es requerido
+  onSquareClick: PropTypes.func.isRequired, // onSquareClick debe ser una función y es requerido
+  isWinner: PropTypes.bool // isWinner puede ser un booleano, pero no es requerido
+};
 
 function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
@@ -52,7 +59,12 @@ function Board({ xIsNext, squares, onPlay }) {
     </>
   );
 }
-
+// Define las validaciones PropTypes para Board
+Board.propTypes = {
+  xIsNext: PropTypes.bool.isRequired, // xIsNext debe ser un booleano y es requerido
+  squares: PropTypes.arrayOf(PropTypes.string).isRequired, // squares debe ser un array de cadenas y es requerido
+  onPlay: PropTypes.func.isRequired // onPlay debe ser una función y es requerido
+};
 export default function Game() {
   const [history, setHistory] = useState([{ squares: Array(9).fill(null), lastMove: null }]);
   const [currentMove, setCurrentMove] = useState(0);
